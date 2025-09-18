@@ -10,9 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.material3.*
-import androidx.compose.runtime.disableHotReloadMode
-import androidx.compose.ui.graphics.vector.addPathNodes
-import com.example.contactapp.data.database.Contact
 
 @Composable
 fun CustemTextField(
@@ -20,7 +17,7 @@ fun CustemTextField(
     onValueChange : (String) -> Unit,
     label : String,
     modifier: Modifier = Modifier,
-    singline : Boolean = true,
+    singeline : Boolean = true,
     leadingIcon : ImageVector? =null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -41,7 +38,7 @@ fun CustemTextField(
                     disabledLeadingIconColor = MaterialTheme.colorScheme.onSurface.copy(alpha = ContentAlpha.disabled)
         ),
         modifier = modifier,
-        singline = singline,
+        singline = singeline,
         leadingIcon = leadingIcon.let { icon->
             {
                 Icon(imageVector = icon, contentDescription = null)
