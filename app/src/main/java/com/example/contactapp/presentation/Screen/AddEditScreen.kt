@@ -11,19 +11,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Button
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,10 +38,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.contactapp.presentation.ContactState
-import com.example.contactapp.presentation.Utils.CustemTextField
+import com.example.contactapp.presentation.Utils.CustomTextField
 import com.example.contactapp.presentation.Utils.ImageCompress
 import java.io.InputStream
-import androidx.compose.material3.MaterialTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -93,8 +93,9 @@ fun AddEditScreen(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val image = state.image.value?.let {
-                BitmapFactory.decodeByteArray(it, 0, it.size)
+            // explicit lambda parameter name to avoid 'it' confusion
+            val image = state.image.value?.let { bytes ->
+                BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
             }?.asImageBitmap()
 
             Box(
@@ -123,6 +124,7 @@ fun AddEditScreen(
                         tint = MaterialTheme.colorScheme.onSurface
                     )
                 }
+
                 IconButton(
                     onClick = {
                         pickMedia.launch(
@@ -144,7 +146,7 @@ fun AddEditScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            CustemTextField(
+            CustomTextField(
                 value = state.name.value,
                 onValueChange = { state.name.value = it },
                 label = "Name",
@@ -155,7 +157,7 @@ fun AddEditScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            CustemTextField(
+            CustomTextField(
                 value = state.phone.value,
                 onValueChange = { state.phone.value = it },
                 label = "Phone Number",
@@ -166,7 +168,7 @@ fun AddEditScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            CustemTextField(
+            CustomTextField(
                 value = state.email.value,
                 onValueChange = { state.email.value = it },
                 label = "Email",

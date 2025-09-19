@@ -94,7 +94,7 @@ fun SplashScreen(modifier: Modifier = Modifier) {
                 contentDescription = "Splash Screen",
                 modifier = Modifier
                     .size(300.dp)
-                    .padding(end = 15.dp)
+                    .padding( 15.dp)
                     .background(color = Color.Black)
             )
             BasicText(
